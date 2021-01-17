@@ -22,7 +22,12 @@ RSpec/ExampleLength:
   Max: 7
 RSpec/NamedSubject:
   Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/AnyInstance:
+  Enabled: false
 
 AllCops:
   Exclude:
     - 'db/**/*'
+  SuggestExtensions: false

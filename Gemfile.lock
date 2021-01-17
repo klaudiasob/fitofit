@@ -69,8 +69,14 @@ GEM
     crass (1.0.6)
     diff-lcs (1.4.4)
     erubi (1.10.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     ffaker (2.17.0)
     ffi (1.14.2)
+    geocoder (1.6.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.7)
@@ -122,6 +128,10 @@ GEM
       bundler (>= 1.15.0)
       railties (= 6.1.1)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.4)
+      actionpack (>= 5.0.1.x)
+      actionview (>= 5.0.1.x)
+      activesupport (>= 5.0.1.x)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -221,12 +231,15 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
+  factory_bot_rails
   ffaker
+  geocoder
   listen (~> 3.3)
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.1)
+  rails-controller-testing
   rspec-rails (~> 4.0.1)
   rubocop
   rubocop-rspec
