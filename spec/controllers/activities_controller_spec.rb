@@ -6,20 +6,13 @@ RSpec.describe ActivitiesController, type: :controller do
     it 'assigns @activities' do
       activities = create_list(:activity, 5, :with_2_points)
       get :index
-      expect(assigns(:activities)).to eq(activities)
+      expect(assigns(:weekly_distance)).to eq(activities.sum(&:distance))
+      expect(assigns(:activities_by_day)).to eq(Activity.all.group_by_day(:created_at).sum(:distance))
     end
 
     it 'renders the index template' do
       get :index
       expect(response).to render_template('index')
-    end
-  end
-
-  describe 'GET #show' do
-    it 'assigns the requested activity to @activity' do
-      activity = create(:activity, :with_2_points)
-      get :show, params: { id: activity.id }
-      expect(assigns(:activity)).to eq(activity)
     end
   end
 

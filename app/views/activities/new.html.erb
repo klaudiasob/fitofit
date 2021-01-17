@@ -1,0 +1,25 @@
+<h3 class="header">Nowa aktywność</h3>
+<hr>
+
+<div id="error_explanation">
+  <ul>
+    <% @activity.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+
+<%= form_for @activity do |f| %>
+
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <%= f.label :start_address %>
+      <%= f.text_area :start_address, class: 'form-control' %>
+    </div>
+    <div class="form-group col-md-12">
+      <%= f.label :end_address %>
+      <%= f.text_area :end_address, class: 'form-control' %>
+    </div>
+  </div>
+  <p><%= f.submit "Submit", class: 'btn btn-info' %></p>
+<% end %>

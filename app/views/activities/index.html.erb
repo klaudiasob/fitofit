@@ -1,0 +1,15 @@
+<div class="center">
+  <h2>Fitofit</h2>
+</div>
+<%= link_to 'Dodaj aktywność', new_activity_path, class: 'btn btn-info' %>
+Moj tydzień: <%= @weekly_distance %> km
+<table class="table table-hover">
+  <tbody>
+  <% @activities_by_day.each do |activity| %>
+    <tr>
+      <td> <%= l(activity[0], format: "%B %d") %></td>
+      <td> <%= activity[1] %> km</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

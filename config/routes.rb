@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :activities, except: %i[edit update destroy]
+  resources :activities, only: %i[index new create]
 end
