@@ -13,13 +13,13 @@
 
   <div class="form-row">
     <div class="form-group col-md-12">
-      <%= f.label :start_address %>
+      <%= f.label 'Adres początkowy' %>
       <%= f.text_area :start_address, class: 'form-control' %>
     </div>
     <div class="form-group col-md-12">
-      <%= f.label :end_address %>
+      <%= f.label 'Adres końcowy' %>
       <%= f.text_area :end_address, class: 'form-control' %>
     </div>
   </div>
-  <p><%= f.submit "Submit", class: 'btn btn-info' %></p>
+  <p><%= f.submit "Wyślij", class: 'btn btn-info' %></p>
 <% end %>
