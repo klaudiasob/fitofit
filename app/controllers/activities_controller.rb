@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ActivitiesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     activities = Activity.all
     @weekly_distance = activities.this_week.sum(:distance)
