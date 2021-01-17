@@ -6,7 +6,7 @@ class ActivitiesController < ApplicationController
   def index
     activities = current_user.activities
     @weekly_distance = activities.this_week.sum(:distance)
-    @activities_by_day = activities.this_month.group_by_day(:created_at).sum(:distance)
+    @activities_by_day = activities.this_month.group_by_day(:created_at, series: false).sum(:distance)
   end
 
   def new
