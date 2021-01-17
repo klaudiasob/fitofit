@@ -3,11 +3,15 @@
 require 'rails_helper'
 RSpec.describe ActivitiesController, type: :controller do
   describe 'GET #index' do
+    login_user
+
     it 'assigns @activities' do
-      activities = create_list(:activity, 5, :with_2_points)
+      create_list(:activity, 3, :with_2_points)
+      activities = create_list(:activity, 5, :with_2_points, user: subject.current_user)
       get :index
       expect(assigns(:weekly_distance)).to eq(activities.sum(&:distance))
-      expect(assigns(:activities_by_day)).to eq(Activity.all.group_by_day(:created_at).sum(:distance))
+      expect(assigns(:activities_by_day)).to eq(Activity.where(user: subject.current_user)
+                                                        .group_by_day(:created_at).sum(:distance))
     end
 
     it 'renders the index template' do
@@ -17,7 +21,7 @@ RSpec.describe ActivitiesController, type: :controller do
   end
 
   describe 'POST #create' do
-    subject { post :create, params: params }
+    login_user
 
     before do
       allow(Activity).to receive(:new).and_return(activity)
@@ -36,10 +40,10 @@ RSpec.describe ActivitiesController, type: :controller do
     it 'calls ActivityServices::Create' do
       activity_params = ActionController::Parameters.new(params[:activity]).permit(:start_address, :end_address)
 
-      expect(ActivityServices::Create).to receive(:new).with(activity, activity_params).and_call_original
+      expect(ActivityServices::Create).to receive(:new).with(activity, activity_params, subject.current_user).and_call_original
       expect_any_instance_of(ActivityServices::Create).to receive(:call)
 
-      subject
+      post :create, params: params
     end
   end
 end

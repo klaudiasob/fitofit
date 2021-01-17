@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class ActivitiesController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    activities = Activity.all
+    activities = current_user.activities
     @weekly_distance = activities.this_week.sum(:distance)
     @activities_by_day = activities.this_month.group_by_day(:created_at).sum(:distance)
   end
@@ -13,7 +15,7 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new
-    result = ActivityServices::Create.new(@activity, activity_params).call
+    result = ActivityServices::Create.new(@activity, activity_params, current_user).call
 
     if result
       redirect_to activities_path, notice: 'Activity was successfully created.'

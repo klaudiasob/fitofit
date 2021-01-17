@@ -2,6 +2,7 @@
   <h2>Fitofit</h2>
 </div>
 <%= link_to 'Dodaj aktywność', new_activity_path, class: 'btn btn-info' %>
+<%= link_to 'Wyloguj', destroy_user_session_path, method: :delete, class: 'btn btn-light' %>
 Moj tydzień: <%= @weekly_distance %> km
 <table class="table table-hover">
   <tbody>

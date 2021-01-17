@@ -2,6 +2,7 @@
 
 class Activity < ApplicationRecord
   has_many :points
+  belongs_to :user
   validate :two_points?
 
   attr_reader :start_address, :end_address
