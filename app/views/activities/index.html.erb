@@ -2,15 +2,26 @@
   <h2>Fitofit</h2>
 </div>
 <%= link_to 'Dodaj aktywność', new_activity_path, class: 'btn btn-info' %>
-<%= link_to 'Wyloguj', destroy_user_session_path, method: :delete, class: 'btn btn-light' %>
-Moj tydzień: <%= @weekly_distance %> km
-<table class="table table-hover">
-  <tbody>
-  <% @activities_by_day.each do |activity| %>
+<%= link_to 'Wyloguj', destroy_user_session_path, method: :delete, class: 'btn btn-light', style: 'float: right;' %>
+<hr>
+<p>Mój tydzień: <%= @weekly_distance %> km</p>
+
+<div class="container" style="background-color: #F5F5F5; padding: 20px">
+  <h5>Mój miesiąc</h5>
+  <table class="table table-hover">
+    <thead>
     <tr>
-      <td> <%= l(activity[0], format: "%B %d") %></td>
-      <td> <%= activity[1] %> km</td>
+      <th>Dzień</th>
+      <th>Suma kilometrów</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    <% @activities_by_day.each do |activity| %>
+      <tr>
+        <td> <%= l(activity[0], format: "%B %d") %></td>
+        <td> <%= activity[1] %> km</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
