@@ -2,11 +2,9 @@
 
 class ActivitiesController < ApplicationController
   def index
-    @activities = Activity.all
-  end
-
-  def show
-    @activity = Activity.find(params[:id])
+    activities = Activity.all
+    @weekly_distance = activities.this_week.sum(:distance)
+    @activities_by_day = activities.this_month.group_by_day(:created_at).sum(:distance)
   end
 
   def new
@@ -18,7 +16,7 @@ class ActivitiesController < ApplicationController
     result = ActivityServices::Create.new(@activity, activity_params).call
 
     if result
-      redirect_to @activity, notice: 'Activity was successfully created.'
+      redirect_to activities_path, notice: 'Activity was successfully created.'
     else
       render :new
     end
