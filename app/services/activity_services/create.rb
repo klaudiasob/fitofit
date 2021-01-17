@@ -2,16 +2,18 @@
 
 module ActivityServices
   class Create
-    attr_reader :activity, :params
+    attr_reader :activity, :params, :user
 
-    def initialize(activity, params)
+    def initialize(activity, params, user)
       @activity = activity
       @params = params
+      @user = user
     end
 
     def call
       create_start_and_end_points
       calculate_distance
+      assign_user
       activity.save
     end
 
@@ -28,6 +30,10 @@ module ActivityServices
 
     def calculate_distance
       activity.distance = activity.points.first.distance_to(activity.points.last)
+    end
+
+    def assign_user
+      activity.user = user
     end
   end
 end

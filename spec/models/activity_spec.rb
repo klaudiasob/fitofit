@@ -9,6 +9,7 @@ RSpec.describe Activity, type: :model do
 
   describe 'associations' do
     it { is_expected.to have_many(:points).class_name('Point') }
+    it { is_expected.to belong_to(:user).class_name('User') }
   end
 
   describe 'validations' do

@@ -3,9 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe ActivityServices::Create do
-  subject { described_class.new(activity, activity_params).call }
+  subject { described_class.new(activity, activity_params, user).call }
 
   let(:activity) { Activity.new }
+  let(:user) { create(:user) }
 
   describe '.call' do
     context 'with valid params' do
@@ -15,7 +16,7 @@ RSpec.describe ActivityServices::Create do
       end
 
       it 'creates activity' do
-        expect { subject }.to change(Activity, :count).by(1)
+        expect { subject }.to change(user.activities, :count).by(1)
       end
     end
 

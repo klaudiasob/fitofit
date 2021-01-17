@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :activity do
     distance { rand(1..10) }
+    user
 
     trait :with_2_points do
       points { build_list(:point, 2) }
